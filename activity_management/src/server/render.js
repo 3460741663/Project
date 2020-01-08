@@ -1,10 +1,17 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server'
 import Header from '../components/Header'
-export default () => {
+import { StaticRouter } from 'react-router-dom'
+import routes from '../routers'
+import { renderRoutes } from 'react-router-config'
+export default (req) => {
   // jsx
   const App = (
-    <Header />
+    <Provider store={store}>
+      <StaticRouter location={req.path}>
+        <div>{renderRoutes(routes)}</div>
+      </StaticRouter>
+    </Provider>
   )
   return `
 <!DOCTYPE html>

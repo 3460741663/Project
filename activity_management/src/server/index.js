@@ -11,7 +11,7 @@ const app = new express();
 // publi 前端打包后访问的静态资源
 app.use(express.static('public'))
 app.get('*', (req, res) => {
-  const html = render();
+  const html = render(req);
   res.send(html)
 })
 app.listen(3000, () => {

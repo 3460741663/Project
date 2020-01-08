@@ -1,4 +1,5 @@
 import React from'react';
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
   click() {
@@ -7,7 +8,9 @@ class Header extends React.Component {
   render () {
     return (
       <div>
-        <span>我是组件Header !</span>
+        <Link to='/'>home</Link>
+        <Link to='/login'>login</Link>
+        <span>我是组件Header !</span> 
         <button onClick={this.click}> Click me !</button>
       </div>
     )
