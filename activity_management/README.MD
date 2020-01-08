@@ -5,13 +5,14 @@
 >
 如下图所示，服务端渲染需要完成Component、Router和Store的同构（开局一张图，内容全靠编）
 ![](https://user-gold-cdn.xitu.io/2019/12/30/16f56f6d4b980f88?w=775&h=348&f=jpeg&s=19363)
-### 1. 创建项目
+**创建项目**
+>
 npm init -y 
 >
 npm install webpack
 >
 webpack-cli --save-dev
-### 2. 同构html
+### 1. 同构html
 #### 渲染HTML
 * 创建根目录 mkdir ./src
 * 创建服务端根目录
@@ -134,3 +135,53 @@ module.exports = webpackMerge(config, clientConfig);
 app.use(express.static('public'))
 ```
 完成上述步骤后，事件绑定就已经完成了。至此，已经完成的html渲染和事件绑定，即Component的同构
+
+![](https://user-gold-cdn.xitu.io/2019/12/30/16f5704f198d701c?w=1920&h=1030&f=png&s=72221)
+### 2. 同构路由
+* 建路由表以及需要的页面
+```js
+export default [
+  {
+    path: '/',
+    component: App,
+    routes: [
+      {
+        path: '/home',
+        component: Home,
+        exact: true
+      },
+      {
+        path: '/login',
+        component: Login,
+      }
+    ]
+  }
+]
+```
+* 客户端用BrowserRouter管理路由
+```js
+<BrowserRouter>
+  <div>{ renderRoutes(routers) }</div>
+</BrowserRouter>
+```
+* 服务端用StaticRoute管理路由
+```js
+<StaticRouter location={req.path}>
+  <div>{renderRoutes(routes)}</div>
+</StaticRouter>
+```
+完成上述步骤后，就完成的路由的同构即首屏加载的内容是已经生成好的html,且匹配路由
+![](https://user-gold-cdn.xitu.io/2020/1/2/16f669ac2ea6d208?w=1920&h=1030&f=png&s=100580)
+### 3. 同构Store
+#### redux
+redux的流程:创建一个全局对象，对它的访问和修改只能通过特定的方法实现。
+1. 用provide包裹整个#app, app即整个项目。然后再provide上挂一个store,此后app的所有子组件均可访问到变量，创建好了这个**全局对象**
+```js
+<Provider store={store}>
+  <StaticRouter location={req.path}>
+   <div>{renderRoutes(routes)}</div>
+  </StaticRouter>
+</Provider>
+```
+2. 创建这个全局对象:
+- 它应该
