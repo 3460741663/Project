@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import * as activityReducer from '../pages/activitiesSquare/activityListReducer'
+import * as activityReducer from '../pages/activititySquare/activityListReducer'
 export default combineReducers({
   activityReducer: activityReducer
 })
