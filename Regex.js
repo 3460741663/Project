@@ -1,4 +1,3 @@
-var str = '[{duration=120, start_time=2019-12-19, community_ID=2, user_ID=3, type_ID=4, name=history, ID=1, point=2.0, status=7}, {duration=120, start_time=2019-12-19, community_ID=5, user_ID=22, type_ID=1, name=ActiveList, ID=11, point=1.5, status=2}, {duration=120, start_time=2019-12-12, community_ID=3, user_ID=22, type_ID=4, name=ActiveList, ID=2, point=2.0, status=1}, {duration=120, start_time=2019-12-06, community_ID=2, user_ID=4, type_ID=1, name=ActiveList, ID=8, point=2.0, status=2}, {duration=120, start_time=2019-12-06, community_ID=3, user_ID=21, type_ID=1, name=ActiveList, ID=6, point=3.0, status=1}, {duration=60, start_time=2019-12-06, community_ID=4, user_ID=24, type_ID=1, name=ActiveList, ID=4, point=4.0, status=2}, {duration=120, start_time=2019-11-22, community_ID=3, user_ID=21, type_ID=1, name=ActiveList, ID=9, point=5.0, status=3}]'
 // // 方案一
 // // var reg = /=/g;
 // var reg = /}, {/g;
@@ -37,10 +36,6 @@ var str = '[{duration=120, start_time=2019-12-19, community_ID=2, user_ID=3, typ
 // var str = '123zxc_.7589uuo_.789fiuio_.'
 // var reg = /((\w+)(.?))/g;
 // console.log(str.replace(reg, '$3*'))
-var reg = /([\w-.]+)/g;
-var result1 = str.replace(reg, '"$1"')
-var result = result1.replace(/=/g, ":")
-// console.log(JSON.parse(result));
 
 // text
 // // 1. 匹配颜色
