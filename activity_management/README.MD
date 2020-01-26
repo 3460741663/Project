@@ -297,7 +297,7 @@ Promise.all(promises)
  把服务端的数据以字符串的形式塞进html文本中
 ```js
 <script>
-    window.__context__  = {state: ${JSON.stringify(store.getState())}}
+    window.__context__  = {state: ${JSON.stringify(store.getState())}} 
 </script>
 ```
 客户端获取数据时，从hmtl中拿到值
@@ -316,4 +316,107 @@ export const Clientstore = () => {
 源码Git地址：https://github.com/3460741663/Project/tree/master/activity_management
 使用说明:该项目是一个完整的完成了SSR的项目，先使用node跑mock-server下的js程序(模拟数据请求的服务器),然后npm run dev跑项目
 >
-后面将继续一步一步完成这个项目，未完~
+### 4. Css服务端渲染
+1. 新建css文件，引入并使用
+2. 配置webpack,让webpack支持编译css文件,需要`npm install style-loader css-loader --D`俩个工具
+```js
+rules: [{
+  test: /\.css?$/,
+  use: ['style-loader', {
+    loader: 'css-loader',
+    options: {
+      modules: true
+    }
+  }]
+}]
+```
+配置好之后就就可以让css生效了
+3. 服务端css加载
+* 使用工具`npm install -D isomorphic-style-loader`,给css文件添加_getCss()方法，查看源码后得知返回css文件内容tostring后的结果
+* 配置服务端的webpack
+```js
+rules: [{
+  test: /\.css?$/,
+  use: ['isomorphic-style-loader', {
+    loader: 'css-loader',
+    options: {
+      modules: true
+    }
+  }]
+}]
+```
+* staticRouter提供一个钩子变量context
+>会以props的形式在组件之间传递，也可以在渲染的过程中拿到它。所以，生命一个空数组让它在组件内走一遭之后再把内容沿途需要的css拼起来，再返回的内容里插入style标签。
+```js
+let context = { css: [] }
+// context从外界传入
+<StaticRouter location={req.path} context={context}>
+    <div>
+        {renderRoutes(routes)}
+    </div>
+</StaticRouter>
+```
+* 我们只在服务端渲染的使用使用了staticRouter，所以可以用来判断是否为服务端渲染环境
+```js
+componentWillMount() {
+  // 判断是否为服务端渲染环境
+  // context是props,也可以被外界取到
+  // 通过context收集匹配到当前路由的所有组件的css
+  if (this.props.staticContext) {
+    this.props.staticContext.css.push(styles._getCss())
+  }
+}
+```
+* 把获得的css以style标签插入到返回的html中即可
+```js
+// 拼接收集到的css
+const cssStr = context.css.length ? context.css.join('\n') : '';
+/ 在返回的html字符串插入style标签
+<style>${cssStr}</style>
+```
+达到如下效果，说明css的服务端渲染成功了
+![](https://user-gold-cdn.xitu.io/2020/1/31/16ffb826c386855b?w=1920&h=1030&f=png&s=141476)
+#### 利用高阶组件优化css服务端渲染
+> * 高阶组件首先自己是一个组件，且接受一个组件作为参数，作用就是把这个参数组件增强成为另外一个组件。扩充组件的作用，提高了代码的复用性，减少重复代码；
+> * 控制组件的渲染逻辑，比如:鉴权;
+> * 生命周期捕获/劫持：借助父组件子组件生命周期规则捕获子组件的生命周期，常见case：打点。
+这里使用的就是生命周期捕获，父组件捕获子组件的componentWillMount生命周期，达到收集css的目的
+```js
+import React, { Component } from 'react';
+//函数返回组件
+export default (DecoratedComponent, styles) => {
+  return class NewComponent extends Component {
+    componentWillMount() {
+      if (this.props.staticContext) {
+        // styles._getCss来自isomorphic-style-loader
+        this.props.staticContext.css.push(styles._getCss());
+        console.log(this.props.staticContext)
+      }
+      
+    }
+    render() {
+      return <DecoratedComponent {...this.props} />
+    }
+  };
+}
+```
+```js
+const activity = connect(mapStateToProps, mapDispatchToProps)(withStyles(activitySquare, styles));
+activity.loadData = (store) => {
+  return store.dispatch(getActivityList())
+};
+export default activity;
+```
+使用是时候需要注意的是，这里有俩个高阶组件connect,自定义高阶组件withStyles他俩的包裹顺序以及loadData需要挂载在被导出的组件上，不然路由表出错
+```js
+{
+  path: '/activitySquare',
+  component: activitySquare,
+  loadData: activitySquare.loadData,
+}
+```
+SSR完整了，后面将继续一步一步完成这个项目，未完~
+>
+完整项目GIT地址:https://github.com/3460741663/Project/tree/master/activity_management
+>
+参考资料:[彻底理解服务端渲染原理](https://juejin.im/post/5d1fe6be51882579db031a6d)
