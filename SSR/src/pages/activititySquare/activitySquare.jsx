@@ -1,22 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getActivityList } from './action'
+import styles from './activitySquare.css';
+import { Button } from 'antd';
+import withStyles from '../../withStyles'
 
 class activitySquare extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getActivityList();
+    //判断是否为服务端渲染环境
+    if (this.props.staticContext) {
+      this.props.staticContext.css.push(styles._getCss())
+    }
+    // console.log(this.props);
+    // if (this.props.staticContext) {
+    //   console.log("*************", '一个CSS被加载！', "________________")
+    //   this.props.staticContext.css.push(styles._getCss());
+    // }
   }
   render() {
     const { activityList } = this.props
-    console.log(activityList);
     return ( 
-      <div>   
-        <h1>活动列表</h1>
+      <div>
+        <Button type="primary">Primary</Button>
+        <a className={styles.header}>css实验处</a>
         <ul>
         {
           activityList && activityList.map((item, index) => {
             return (
-              <li key={index}>{item.content}</li>
+              <li key={index}>{item.name}</li>
             )
           })
         }
@@ -24,9 +36,6 @@ class activitySquare extends Component {
       </div>
      );
   }
-}
-activitySquare.loadData = function(store) {
-  return  store.dispatch(getActivityList())
 }
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -40,4 +49,10 @@ const mapStateToProps = (state) => {
     activityList: state.activityReducer.activity
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
+// export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
+const activitysquare = connect(mapStateToProps, mapDispatchToProps)(withStyles(activitySquare, styles));
+
+activitysquare.loadData = (store) => {
+  return store.dispatch(getActivityList())
+};
+export default activitysquare;

@@ -20,8 +20,6 @@ app.get('*', (req, res) => {
   // 3. dispatch
   // 4. 渲染
   
-  
-  
   const matchRouters = matchRoutes(routes, req.path);
   // 创建一个store,然后往里面填充数据。这些数据就是被这个路由命中的所有组件的所有数据，包括dispatch之后的数据。所以，需要收集到所有的loadData,并等待它执行完成。
   const store = Serverstore();
@@ -35,7 +33,9 @@ app.get('*', (req, res) => {
   // 等待执行完成后才render
   Promise.all(promises)
   .then((resArray) => {
-    const html = render(req, store);
+    
+    let context = {css: []};
+    const html = render(req, store, context);
     res.send(html);
   })
   .catch(err => {

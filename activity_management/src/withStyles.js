@@ -6,7 +6,6 @@ export default (DecoratedComponent, styles) => {
       if (this.props.staticContext) {
         // styles._getCss来自isomorphic-style-loader
         this.props.staticContext.css.push(styles._getCss());
-        console.log(this.props.staticContext)
       }
       
     }

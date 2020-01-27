@@ -1,0 +1,35 @@
+.contain{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #2b3b4a;
+}
+.logo{
+  width: 100vw;
+  height: 40vh;
+  margin-top: 10vh;
+}
+.InputBox{
+  width: 82vw;
+  position: absolute;
+  top: 50vh;
+}
+.quickLogin{
+  width: 70vw;
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.icon{
+  /* transform: scale(2); */
+  width: 4.5vh;
+  height: 4.5vh;
+}
+.btn{
+  color: 2b3b4a;
+}

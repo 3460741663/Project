@@ -7,8 +7,6 @@ class App extends Component {
     const props = this.props
     return ( 
       <div>
-        <Header/>
-        App
         {
           renderRoutes(props.route.routes)
         }

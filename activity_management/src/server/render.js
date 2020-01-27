@@ -16,10 +16,8 @@ export default (req, store, context) => {
       </StaticRouter>
     </Provider>
   );
-
   // 渲染完成之后，再获取 css 样式
   let cssStr = context.css.join('\n');
-  console.log(cssStr, "______****")
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +25,9 @@ export default (req, store, context) => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.26.7/antd.css" />
   <style>${cssStr}</style>
-  <title>Document</title>
+  <title>activity_management</title>
 </head>
 <body>
   <div id="app">${content}</div>

@@ -8,15 +8,6 @@ import withStyles from '../../withStyles'
 class activitySquare extends Component {
   componentWillMount() {
     this.props.getActivityList();
-    //判断是否为服务端渲染环境
-    if (this.props.staticContext) {
-      this.props.staticContext.css.push(styles._getCss())
-    }
-    // console.log(this.props);
-    // if (this.props.staticContext) {
-    //   console.log("*************", '一个CSS被加载！', "________________")
-    //   this.props.staticContext.css.push(styles._getCss());
-    // }
   }
   render() {
     const { activityList } = this.props
@@ -49,7 +40,6 @@ const mapStateToProps = (state) => {
     activityList: state.activityReducer.activity
   }
 }
-// export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
 const activitysquare = connect(mapStateToProps, mapDispatchToProps)(withStyles(activitySquare, styles));
 
 activitysquare.loadData = (store) => {

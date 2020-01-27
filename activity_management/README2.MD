@@ -72,6 +72,7 @@ response.data = JSON.parse(result);
 1. 在返回的html中插入link标签，加载cdn的样式库`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.26.7/antd.css" >`
 2. 安装、引入即可使用
 > 并没有实现按需加载，觉得可以使用treeshaking
+
 ## 登录注册
 ## 活动广场
 ## 活动举办前
