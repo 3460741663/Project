@@ -175,6 +175,8 @@ export default [
 ### 3. 同构Store
 #### redux
 redux的流程:创建一个全局对象，对它的访问和修改只能通过特定的方法实现。
+
+![](https://user-gold-cdn.xitu.io/2020/1/8/16f855087983c713?w=1154&h=796&f=jpeg&s=127122)
 1. 用provide包裹整个#app, app即整个项目。然后再provide上挂一个store,此后app的所有子组件均可访问到变量，创建好了这个**全局对象**
 ```js
 <Provider store={store}>
@@ -184,4 +186,50 @@ redux的流程:创建一个全局对象，对它的访问和修改只能通过�
 </Provider>
 ```
 2. 创建这个全局对象:
-- 它应该
+- 首先它应该是一个reducer，开始访问或事件会修改它。reducer会有一个默认的对象和一个抛出的方法，调用这个方法时这个action需要是一个字符串匹配下面的switch，且必须要是唯一的，所以应当用一个文件管理这些case字符串
+```js
+import constant from '../../store/constant'
+const defaultState = {
+  activity: []
+};
+export const activityReducer = (state = defaultState, actions) => {
+  switch(actions.type){
+    case constant.ADD_ACTIVITY:
+      return { ... state, activity:actions.activity };
+    case constant.REMOVE_ACTIVITY:
+      return { ... state, activity:actions.activity };
+    default: return state
+  }
+}
+```
+- reducer可以有许多，来自不同的地方，但是一般统一起来放在要给store里面
+```js
+import { combineReducers } from 'redux'
+import * as activityReducer from '../pages/activitiesSquare/activityListReducer'
+export default combineReducers(activityReducer)
+```
+- 最后再将这个reducer变成store就完成了,至此store已经创建好了
+```js
+import { createStore } from 'redux'
+import { combineReducers } from './reducer'
+export default store = () => {
+  return createStore(combineReducers)
+}
+```
+- 使用store: 访问和修改
+1. 使用Provide包裹抛出store自不必说，让它的子节点，孙子节点都能访问到这个props，用这一对标签包裹app让整个项目都能获取到这个store
+```js
+<Provider store={store()}>
+</Provider>
+```
+2. 对react-redux的使用，即connect，将store中的数据取下映射成props
+```js
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    activityList: state.activityReducer.activity
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
+```
+未完。。。

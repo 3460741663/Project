@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import { combineReducers } from './reducer'
-export default store = () => {
-  return createStore(combineReducers)
+import { reduce } from './reducer'
+export const store = () => {
+  return createStore(reduce)
 }
