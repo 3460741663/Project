@@ -4,14 +4,15 @@ import Header from '../components/Header'
 import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 import { BrowserRouter } from 'react-router-dom'
-import routers from '../routers'
+import routes from '../routers'
 import { store } from '../store/index'
+import { Clientstore } from '../store/index'
 
 const App = function() {
   return (
-    <Provider store={store()}>
+    <Provider store={Clientstore()}>
       <BrowserRouter>
-        <div>{ renderRoutes(routers) }</div>
+      <div>{ renderRoutes(routes) }</div>
       </BrowserRouter>
     </Provider>
   )

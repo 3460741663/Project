@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { getActivityList } from './action'
 
 class activitySquare extends Component {
-  render() { 
+  componentDidMount() {
+    this.props.getActivityList();
+  }
+  render() {
     const { activityList } = this.props
-    console.log(activityList)
+    console.log(activityList);
     return ( 
-      <div>
+      <div>   
+        <h1>活动列表</h1>
         <ul>
-          {
-            activityList.map((item, index) => {
-            return <li key={index}>{item.name}</li>
-            })
-          }
+        {
+          activityList && activityList.map((item, index) => {
+            return (
+              <li key={index}>{item.content}</li>
+            )
+          })
+        }
         </ul>
       </div>
      );
   }
 }
+activitySquare.loadData = function(store) {
+  return  store.dispatch(getActivityList())
+}
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCommentList: () => {
-      dispatch(getCommentList())
+    getActivityList: () => {
+      dispatch(getActivityList())
     }
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     activityList: state.activityReducer.activity
   }

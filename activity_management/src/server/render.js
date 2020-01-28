@@ -5,11 +5,11 @@ import { StaticRouter } from 'react-router-dom'
 import routes from '../routers'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from "react-redux";
-import { store } from '../store/index'
-export default (req) => {
+import { Serverstore } from '../store/index'
+export default (req, store) => {
   // jsx
   const App = (
-    <Provider store={store()}>
+    <Provider store={store}>
       <StaticRouter location={req.path}>
         <div>{renderRoutes(routes)}</div>
       </StaticRouter>
@@ -26,6 +26,9 @@ export default (req) => {
 </head>
 <body>
   <div id="app">${renderToString(App)}</div>
+  <script>
+    window.__context__  = {state: ${JSON.stringify(store.getState())}}
+  </script>
   <script src="/index.js"></script>
 </body>
 </html>

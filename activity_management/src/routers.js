@@ -21,6 +21,7 @@ export default [
       {
         path: '/activitySquare',
         component: activitySquare,
+        loadData: activitySquare.loadData,
       }
     ]
   }

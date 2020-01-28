@@ -173,7 +173,7 @@ export default [
 完成上述步骤后，就完成的路由的同构即首屏加载的内容是已经生成好的html,且匹配路由
 ![](https://user-gold-cdn.xitu.io/2020/1/2/16f669ac2ea6d208?w=1920&h=1030&f=png&s=100580)
 ### 3. 同构Store
-#### redux
+* #### redux流程
 redux的流程:创建一个全局对象，对它的访问和修改只能通过特定的方法实现。
 
 ![](https://user-gold-cdn.xitu.io/2020/1/8/16f855087983c713?w=1154&h=796&f=jpeg&s=127122)
@@ -222,7 +222,7 @@ export default store = () => {
 <Provider store={store()}>
 </Provider>
 ```
-2. 对react-redux的使用，即connect，将store中的数据取下映射成props
+2. 对react-redux的使用，即connect，将store中的数据和dispatch映射到props上
 ```js
 const mapStateToProps = (state) => {
   console.log(state);
@@ -232,4 +232,82 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
 ```
-未完。。。
+3. 另外，dispatch除了可以提交一个纯对象外，还可以dispatch一个方法，此时还需要在创建store时引入中间件thunk
+```js
+function getActivityList() {
+  return (dispatch) => {
+    return axios.get('http://localhost:3003/mapi/comment').then(res => {
+      const data = res.data.list;
+      console.log(data);
+      dispatch({
+        type: 'ACtIVITY_LIST',
+        activity: data
+      })
+    })
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getActivityList: () => {
+      dispatch(getActivityList())
+    }
+  }
+}
+```
+ * #### 获得服务端Store 
+>
+流程是先创建一个store,然后往里面填充数据。这些数据就是被这个路由命中的所有组件的所有数据，包括dispatch之后的数据。所以，需要收集到所有的loadData,并等待它执行完成。
+ 1. 命中当前路径下的所有组件
+```js
+const matchRouters = matchRoutes(routes, req.path);
+```
+2. 执行当中的所有请求,完成所有的loadData。获取组件上的数据填充方法，过程：
+* * 把数据填充的方法loadData挂在组件上
+```js
+Home.loadData = function(store) {
+  // loadData的起点
+  // 这里是Promis则所有的loadData都是Promis， Promise.all
+  // getCommentList是一个action
+  return  store.dispatch(getCommentList())
+}
+```
+* * 从被命中的组件上取下loadData方法执行,执行其中的请求就是填充redux中的数据,即完成所有的dispatch
+```js
+  matchRouters.forEach(mRouter => {
+    if(mRouter.route.loadData){
+      promises.push(mRouter.route.loadData(store))
+    }
+  })
+```
+  3. 等待loadData执行结束,此时store已经有数据了
+```js
+Promise.all(promises)
+  // promise完成
+  .then(resArray => {
+    // console.log(store)
+    const html = render(req, store);
+    res.send(html)
+  })
+```
+4. 等待所有请求执行完毕后把有数据的store传过去，再渲染页面
+ * #### 服务端和客户端store统一
+ 把服务端的数据以字符串的形式塞进html文本中
+```js
+<script>
+    window.__context__  = {state: ${JSON.stringify(store.getState())}}
+</script>
+```
+客户端获取数据时，从hmtl中拿到值
+```js
+export const Clientstore = () => {
+  // store的默认值，把数据JSON.Stringfy放在了script中
+  const defaultStore = window.__context__ || {};
+  return createStore(
+    reduce,
+    defaultStore.state,
+    applyMiddleware(thunk));
+}
+```
+服务端渲染完毕！
+![](https://user-gold-cdn.xitu.io/2020/1/28/16feb8c02e38df85?w=1920&h=1030&f=png&s=141792)
+未完~

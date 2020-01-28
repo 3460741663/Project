@@ -15,7 +15,7 @@ const defaultState = {
 };
 export const activityReducer = (state = defaultState, actions) => {
   switch(actions.type){
-    case constant.ADD_ACTIVITY:
+    case constant.ACtIVITY_LIST:
       return { ... state, activity:actions.activity };
     case constant.REMOVE_ACTIVITY:
       return { ... state, activity:actions.activity };
