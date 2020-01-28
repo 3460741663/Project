@@ -18,7 +18,7 @@
 .quickLogin{
   width: 70vw;
   position: absolute;
-  bottom: 8vh;
+  top: 92vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -31,5 +31,5 @@
   height: 4.5vh;
 }
 .btn{
-  color: 2b3b4a;
+  color: #2b3b4a;
 }

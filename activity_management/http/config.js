@@ -2,12 +2,13 @@ import axios from 'axios'
 import qs from 'qs'
     // 对axios的封装
     let fetch = axios.create({
-        baseURL: 'http://127.0.0.1:8090', // 这里是后端服务器地址
+        baseURL: 'http://127.0.0.1:8090/activity_management', // 这里是后端服务器地址
         credentials: 'include',// 即便是跨域，也携带cookie
         timeout: 5000 // request timeout
     })
     // 添加请求拦截器
     fetch.interceptors.request.use(function (config) {
+        // console.log(config.data)
         // 在发送请求之前做些什么
         if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
             if (typeof (config.data) !== 'string' && config.headers['Content-Type'] !== 'multipart/form-data') {
@@ -23,10 +24,12 @@ import qs from 'qs'
     fetch.interceptors.response.use(response => {
         // 对响应数据做点什么
         // 把响应字符串转换成JSON数据格式（后端数据请求造的孽）
-        var reg = /([\w-.]+)/g;
-        var temp = response.data.replace(reg, '"$1"')
-        var result = temp.replace(/=/g, ":")
-        response.data = JSON.parse(result);
+        if(response.data){
+          var reg = /([\w-.]+)/g;
+          var temp = response.data.replace(reg, '"$1"')
+          var result = temp.replace(/=/g, ":")
+          response.data = JSON.parse(result);
+        }
         return response;
     }, error => {
         // 错误响应应该

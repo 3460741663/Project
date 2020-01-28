@@ -1,30 +1,26 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import React, { Component } from 'react';
-import styles from './Login.css'
+import styles from './Login.css';
+import { message } from 'antd';
+import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
 
 class NormalLoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props.user)
+  }
   componentWillMount() {
     if (this.props.staticContext) {
       this.props.staticContext.css.push(styles._getCss());
     }
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-  handleChange(e) {
-    this.setState({
-      [e.target.name]:e.target.value
-    })
-  }
   render() {
-    const state = {
-      userName:'',
-      password:''
+    const userName = React.createRef();
+    const passWord = React.createRef();
+    const {verify} = this.props;
+    if(this.props.user){
+      return <Redirect to='/activitySquare' />;
     }
     return (
       <div>
@@ -32,8 +28,7 @@ class NormalLoginForm extends React.Component {
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
           placeholder="Username"
           size="large"
-          value={this.state.userName}
-          onChange={this.handleChange}
+          ref={userName}
         />
         <br/>
         <br/>
@@ -42,8 +37,7 @@ class NormalLoginForm extends React.Component {
           type="password"
           placeholder="Password"
           size="large"
-          value={this.state.password}
-          onChange={this.handleChange}
+          ref={passWord}
         />
         <br/>
         <br/>
@@ -51,14 +45,43 @@ class NormalLoginForm extends React.Component {
           className="login-form-button" 
           size="large" 
           ghost="true"
-          block 
+          block
           onClick={()=>{
-            console.log(this.state)
+            let account = {
+              userName:userName.current.state.value,
+              passWord:passWord.current.state.value
+            };
+            verify(account).then(res => {
+              if(res.data){
+                // redux
+                this.props.loginSuccess(res);
+                console.log(this.props.user);
+              }else{
+                message.info('账号或者密码出错！')
+              }
+            })
           }}
         >登录</Button>
+        {/* if (0) {
+          <Redirect to='/' />
+        } */}
       </div>
     );
   }
 }
-
-export default NormalLoginForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginSuccess: (res) => {
+      dispatch({
+        type: 'LOGIN',
+        user: res
+      })
+    }
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);

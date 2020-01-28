@@ -1,12 +1,25 @@
 import fetch from './config'
+import QS from 'qs';
 
 // 获取活动列表
-export function getActivity() {
+export function getActivity(params) {
     return fetch({
-        url: '/activity_management/getActivityList?page=1',
-        method: 'get'
+        url: '/getActivityList',
+        method: 'get',
+        params
     })
 }
+// login
+export function loginVerify(params){
+    console.log('我是登录验证的方法！')
+    return fetch({
+        url:'/login',
+        method:'get',
+        params
+    })
+}
+
+
 // export function apiGetData() {
 //     return fetch({
 //         url: '/api/data/menu-list',
