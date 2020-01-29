@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getActivityList } from './action'
+// import { Tag } from 'antd-mobile';
 
 class activitySquare extends Component {
   componentDidMount() {
@@ -11,12 +12,13 @@ class activitySquare extends Component {
     console.log(activityList);
     return ( 
       <div>   
+        {/* <Tag small>Small and Readonly</Tag> */}
         <h1>活动列表</h1>
         <ul>
         {
           activityList && activityList.map((item, index) => {
             return (
-              <li key={index}>{item.content}</li>
+              <li key={index}>{item.name}</li>
             )
           })
         }
