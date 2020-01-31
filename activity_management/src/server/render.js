@@ -7,14 +7,20 @@ import { renderRoutes } from 'react-router-config'
 import { Provider } from "react-redux";
 import { Serverstore } from '../store/index'
 export default (req, store) => {
+
+  // cssArr  收集每一个组件引入的样式
+  let context = { cssArr: [] };
   // jsx
   const App = (
     <Provider store={store}>
-      <StaticRouter location={req.path}>
+      <StaticRouter location={req.path} context={context}>
         <div>{renderRoutes(routes)}</div>
       </StaticRouter>
     </Provider>
   )
+  // 渲染完成之后，再获取 css 样式
+  let cssStr = context.cssArr.join('\n');
+  // console.log(cssArr)
   return `
 <!DOCTYPE html>
 <html lang="en">

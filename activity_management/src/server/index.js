@@ -35,6 +35,7 @@ app.get('*', (req, res) => {
   // 等待执行完成后才render
   Promise.all(promises)
   .then((resArray) => {
+    console.log('*****',store.getState(), '________________');
     const html = render(req, store);
     res.send(html);
   })

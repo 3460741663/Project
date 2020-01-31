@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getActivityList } from './action'
-// import { Tag } from 'antd-mobile';
+import styles from './activitySquare.css';
+import { Button } from 'antd';
+import withStyles from '../../withStyles'
 
 class activitySquare extends Component {
   componentDidMount() {
@@ -9,11 +11,10 @@ class activitySquare extends Component {
   }
   render() {
     const { activityList } = this.props
-    console.log(activityList);
     return ( 
-      <div>   
-        {/* <Tag small>Small and Readonly</Tag> */}
-        <h1>活动列表</h1>
+      <div>
+        <Button type="primary">Primary</Button>
+        <a className={styles.header}>css实验处</a>
         <ul>
         {
           activityList && activityList.map((item, index) => {
