@@ -6,8 +6,17 @@ import { Button } from 'antd';
 import withStyles from '../../withStyles'
 
 class activitySquare extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getActivityList();
+    //判断是否为服务端渲染环境
+    if (this.props.staticContext) {
+      this.props.staticContext.css.push(styles._getCss())
+    }
+    // console.log(this.props);
+    // if (this.props.staticContext) {
+    //   console.log("*************", '一个CSS被加载！', "________________")
+    //   this.props.staticContext.css.push(styles._getCss());
+    // }
   }
   render() {
     const { activityList } = this.props
@@ -28,9 +37,6 @@ class activitySquare extends Component {
      );
   }
 }
-activitySquare.loadData = function(store) {
-  return  store.dispatch(getActivityList())
-}
 const mapDispatchToProps = (dispatch) => {
   return {
     getActivityList: () => {
@@ -43,4 +49,10 @@ const mapStateToProps = (state) => {
     activityList: state.activityReducer.activity
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
+// export default connect(mapStateToProps, mapDispatchToProps)(activitySquare);
+const activitysquare = connect(mapStateToProps, mapDispatchToProps)(withStyles(activitySquare, styles));
+
+activitysquare.loadData = (store) => {
+  return store.dispatch(getActivityList())
+};
+export default activitysquare;
