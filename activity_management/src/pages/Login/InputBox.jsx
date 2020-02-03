@@ -62,9 +62,6 @@ class NormalLoginForm extends React.Component {
             })
           }}
         >登录</Button>
-        {/* if (0) {
-          <Redirect to='/' />
-        } */}
       </div>
     );
   }

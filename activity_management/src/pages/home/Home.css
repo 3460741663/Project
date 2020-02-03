@@ -1,0 +1,12 @@
+.icon{
+  /* transform: scale(2); */
+  width: 3vh;
+  height:3vh;
+}
+.iconContain{
+  margin-left: 2.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
