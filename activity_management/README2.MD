@@ -72,14 +72,62 @@ response.data = JSON.parse(result);
 1. 在返回的html中插入link标签，加载cdn的样式库`<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.26.7/antd.css" >`
 2. 安装、引入即可使用
 > 并没有实现按需加载，觉得可以使用treeshaking
-
-## 登录注册
-## 活动广场
+### 业务开发
+#### 登录
+1. 使用iconfont适量图标库中的图标
+2. 图片、文件资源放在public目录下，资源路径`./`就是public目录
+3. 输入框由ref监控，
+```js
+const userName = React.createRef();
+const passWord = React.createRef();
+// submit事件触发
+onClick={()=>{
+    // 接口请求参数对象
+    let account = {
+     userName:userName.current.state.value,
+     passWord:passWord.current.state.value
+    };
+    verify(account).then(res => {
+     if(res.data){
+        // redux
+        // 登录成功后把用户信息存储在store中去
+        this.props.loginSuccess(res);
+        console.log(this.props.user);
+      }else{
+        message.info('账号或者密码出错！')
+      }
+    })
+}}
+```
+#### 主页
+使用antd的tabs切换首页/活动/动态/我的
+```js
+<div>
+  <Tabs defaultActiveKey="1" size="small  " tabPosition="bottom">
+    <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/shouye2.png" className={styles.icon} alt=""><span>首页</span></div>} key="1" forceRender >
+      <HomePage {...this.props} />
+    </TabPane>
+    <TabPane  tab={<div className={styles.iconContain}><img src="./image/icon/huodong2.png" className={styles.icon} alt=""><span>活动</span></div>} key="2" forceRender >
+      <HomePage {...this.props} />
+    </TabPane>
+    <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/dongtai2.png" className={styles.icon} alt=""><span>动态</span></div>} key="3" forceRender >
+      <HomePage {...this.props} />
+    </TabPane>
+    <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/wode2.png" className={styles.icon} alt="" /><spa我的</span></div>} key="4" forceRender >
+      <HomePage {...this.props} />
+    </TabPane>
+  </Tabs>
+</div>
+```
+#### 引入的组件的样式并没有实现服务端渲染
+原因是在renderToString的时候，传递的context这个钩子变量，并没有传递到引入的组件中，所以，原样传递获知只传staticContext也行
+`
+<HomePage {...this.props} />
+`
 ## 活动举办前
 ### 活动申请
 ### 活动审核
 ### 活动上线
 #### 设置签到员
-#### 设置负责人
-####          
+#### 设置负责人   
 ## 活动进行中

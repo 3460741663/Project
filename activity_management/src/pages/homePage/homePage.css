@@ -1,0 +1,12 @@
+.contain{
+  background-color: yellow;
+  width: 100vw;
+  height: 87vh;
+  overflow: scroll;
+}
+.div{
+  background-color: blue;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 20vh;
+}

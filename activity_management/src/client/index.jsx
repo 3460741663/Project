@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { renderRoutes } from 'react-router-config'
 import { BrowserRouter } from 'react-router-dom'
 import routes from '../routers'
-import { store } from '../store/index'
 import { Clientstore } from '../store/index'
 
 const App = function() {
