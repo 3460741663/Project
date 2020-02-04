@@ -1,12 +1,26 @@
 .contain{
-  background-color: yellow;
   width: 100vw;
+  padding: 4vw;
   height: 87vh;
   overflow: scroll;
 }
-.div{
-  background-color: blue;
-  width: 100vw;
-  height: 100vh;
-  margin-bottom: 20vh;
+.poster{
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2.5vw;
+  margin-bottom: 1vh;
 }
+.acitivityContain{
+  margin-top: 1vh;
+  padding-left: 4vw;
+}
+.activityList{
+  background-color: azure;
+  height: 200vh;
+}
+.text{
+  color: #3d3d3a;
+  font-size: 14px;
+  font-weight: 600;
+}
+

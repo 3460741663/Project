@@ -1,6 +1,51 @@
-/* body {
-  background: gray;
-} */
-.header {
-  color: yellow;
+.contain{
+  width: 100vw;
+  padding: 4vw;
+  height: 87vh;
+  overflow: scroll;
+}
+.poster{
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2.5vw;
+  margin-bottom: 1vh;
+}
+.text{
+  color: #3d3d3a;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.acitivityContain{
+  margin-top: 1vh;
+  padding: 0 3vw;
+  border-left: 2px solid #fdfcf9;
+  border-right: 2px solid #fdfcf9;
+}
+.activityList{
+  /* height: 200vh; */
+}
+.activtyItem{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 1vh 0;
+  border-bottom: 1px solid #eeede9;
+}
+a {
+  color: #000;
+}
+.img{
+  width: 12vh;
+  height: 12vh;
+}
+
+/* menu的样式 */
+.menuContain{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
