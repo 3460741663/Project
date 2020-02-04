@@ -60,3 +60,8 @@
 // var test5 = /id="[^"]*"/
 // var string = '<div id="container" class="main"></div>';
 // console.log(string.match(test5)[0]);
+
+
+var str = "[{duration=120, start_time=2020-11-19, community_ID=3, user_ID=23, type_ID=1, name=华为财经2020届招牌宣讲会, ID=5, point=4.0, status=1}]";
+var reg = /[^\s^{^}^,^=^\[^\]]+/g;
+console.log(str.match(reg));

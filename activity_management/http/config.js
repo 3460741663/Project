@@ -25,7 +25,7 @@ import qs from 'qs'
         // 对响应数据做点什么
         // 把响应字符串转换成JSON数据格式（后端数据请求造的孽）
         if(response.data){
-          var reg = /([\w-.]+)/g;
+          var reg = /([^\s^{^}^,^=^\[^\]]+)/g;
           var temp = response.data.replace(reg, '"$1"')
           var result = temp.replace(/=/g, ":")
           response.data = JSON.parse(result);

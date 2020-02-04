@@ -123,7 +123,7 @@ onClick={()=>{
 原因是在renderToString的时候，传递的context这个钩子变量，并没有传递到引入的组件中，所以，原样传递获知只传staticContext也行
 `
 <HomePage {...this.props} />
-`
+` 
 ## 活动举办前
 ### 活动申请
 ### 活动审核
