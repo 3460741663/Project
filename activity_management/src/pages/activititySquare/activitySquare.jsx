@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getActivityList } from './action'
 import styles from './activitySquare.css';
-import { Button } from 'antd';
 import withStyles from '../../withStyles';
 import Menu from './MenuContain'
 
@@ -13,23 +12,27 @@ class activitySquare extends Component {
   }
   render() {
     const { activityList } = this.props
+    const position = [7, 26, 48, 67, 89, 108, 129, 150, 171, 191, 211]
     return ( 
       <div className={styles.contain}>
         <div><img src="./image/posters.jpg"  className={styles.poster} alt=""/></div>
-        <div className={styles.text}><text>本校活动</text></div>
+        <div className={styles.text}><span>本校活动</span></div>
         <div className={styles.acitivityContain}>
           <Menu />
+          
           <div className={styles.activityList}>
             {
-              activityList && activityList.map((item, index) => {
+                activityList && activityList.map((item, index) => {
                 return (
                   <div className={styles.activtyItem} key={index}>
-                    <div>
-                      <span><span>【{item.community_name}】</span>{item.name}</span>
-                      <span>{item.start_time}</span>
-                      <span>{item.point}</span>
+                    <div className={styles.textContain}>
+                      <div className={styles.name}><span><span>【{item.community_name}】</span>{item.name}</span></div>
+                        <div className={styles.time}><span>{item.start_time}&nbsp;&nbsp;&nbsp;&nbsp;{item.position}</span></div>
+                      <div className={styles.point}><span>{item.point}</span></div>
                     </div>
-                    <img className={styles.img} src="./image/logo.jpg" alt=""/>
+                    <div className={styles.imgContain}>
+                      <img className={styles.img} style={{top:`-${position[item.img]}vh`}} src="./image/LOGO.png" alt=""/>
+                    </div>
                   </div>
                 )
               })

@@ -12,6 +12,7 @@ import qs from 'qs'
         // 在发送请求之前做些什么
         if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
             if (typeof (config.data) !== 'string' && config.headers['Content-Type'] !== 'multipart/form-data') {
+                console.log(config.data)
                 config.data = qs.stringify(config.data)
             }
         }
@@ -24,7 +25,8 @@ import qs from 'qs'
     fetch.interceptors.response.use(response => {
         // 对响应数据做点什么
         // 把响应字符串转换成JSON数据格式（后端数据请求造的孽）
-        if(response.data){
+        // console.log(response.data)
+        if(response.data && response.data.length){
           var reg = /([^\s^{^}^,^=^\[^\]]+)/g;
           var temp = response.data.replace(reg, '"$1"')
           var result = temp.replace(/=/g, ":")

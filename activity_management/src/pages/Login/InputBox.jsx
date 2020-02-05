@@ -20,7 +20,7 @@ class NormalLoginForm extends React.Component {
     const passWord = React.createRef();
     const {verify} = this.props;
     if(this.props.user){
-      return <Redirect to='/activitySquare' />;
+      return <Redirect to='/home' />;
     }
     return (
       <div>
