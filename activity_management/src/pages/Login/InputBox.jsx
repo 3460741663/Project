@@ -1,7 +1,8 @@
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import React, { Component } from 'react';
 import styles from './Login.css';
-import { message } from 'antd';
+// import { message } from 'antd';
+import { Toast } from 'antd-mobile'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -57,7 +58,7 @@ class NormalLoginForm extends React.Component {
                 this.props.loginSuccess(res);
                 console.log(this.props.user);
               }else{
-                message.info('账号或者密码出错！')
+                Toast.info('账号或密码错误！');
               }
             })
           }}
