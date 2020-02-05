@@ -32,6 +32,11 @@ class MenuContain extends Component {
       param:temp,
       tabName:tempName
     })
+    console.log(this.props.params)
+    // 保存参数
+    let temp1 = this.props.params;
+    temp1[event.item.props.name] = event.key;
+    this.props.changeParams(temp1);
     // 发出请求
     this.props.getActivityList(this.state.param)
   }
@@ -95,12 +100,20 @@ const mapDispatchToProps = (dispatch) => {
       // console.log('我是dispatch')
       // console.log(params);
       dispatch(getActivityList(params))
+    },
+    changeParams:(params)=>{
+      console.log(params, '被放进了redux中！')
+      dispatch({
+        type: 'UPDATA_PARAMS',
+        params: params
+      })
     }
   }
 }
 const mapStateToProps = (state) => {
   return {
-    activityList: state.activityReducer.activity
+    activityList: state.activityReducer.activity,
+    params: state.activityReducer.params
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContain);
