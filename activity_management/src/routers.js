@@ -23,6 +23,10 @@ export default [
         component: activitySquare,
         loadData: activitySquare.loadData,
       }
+      // {
+      //   path:'/demo',
+      //   component: Demo
+      // }
     ]
   }
 ]

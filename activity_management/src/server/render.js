@@ -26,6 +26,7 @@ export default (req, store, context) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.26.7/antd.css" />
+  <link href="https://cdn.bootcss.com/antd-mobile/2.3.1/antd-mobile.css" rel="stylesheet">
   <style>${cssStr}</style>
   <title>activity_management</title>
 </head>

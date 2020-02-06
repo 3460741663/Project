@@ -19,7 +19,6 @@ class activitySquare extends Component {
         <div className={styles.text}><span>本校活动</span></div>
         <div className={styles.acitivityContain}>
           <Menu />
-          
           <div className={styles.activityList}>
             {
                 activityList && activityList.map((item, index) => {

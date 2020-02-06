@@ -26,7 +26,7 @@
 }
 .activityList{
   /* height: 200vh; */
-  margin-top: 2vh;
+   margin-top: 2vh;
 }
 .activtyItem{
   width: 100%;
@@ -70,14 +70,8 @@ a {
   position: relative;
 }
 .img{
-  /* width: 12vh;
-  height: 12vh;
-  overflow: hidden; */
-  /* transform: translateX(-25%); */
-  /* transform: translateY(-20%); */
   position: absolute;
   left: -6vh;
-  /* top: -7vh; */
 }
 
 /* menu的样式 */
