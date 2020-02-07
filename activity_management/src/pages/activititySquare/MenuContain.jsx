@@ -41,35 +41,45 @@ class MenuContain extends Component {
     this.props.getActivityList(this.state.param)
   }
   render() {
+    // overlay的样式对象
+    const overlayStyle = {width:'91vw', margin:'0 4.5vw', height:'40vh', overflow:'scroll'};
     // 保存接口信息
     var params = {belongs:0};
+    const belongsData = ['羽毛球社', '乒乓球社', '篮球社', '青协', '学生会', '文艺社',
+    '足球队', '广播站', '街舞社', '绿派社', '轮滑社', 'ERP协会', 'IT帮']
     const belongs = (
-      <Menu onClick={this.handleClick}>
-        <Menu.Item key="1" name="belongs">绿派社</Menu.Item>
-        <Menu.Item key="2" name="belongs">学生会</Menu.Item>
-        <Menu.Item key="3" name="belongs">轮滑社</Menu.Item>
-        <Menu.Item key="0" name="belongs">不限</Menu.Item>
+      <Menu onClick={this.handleClick} style = {overlayStyle}>
+        {
+          belongsData.map((item, index) => {
+            return <Menu.Item key={index+2} name="belongs">{item}</Menu.Item>
+          })
+        }
       </Menu>
     );
     const type = (
-      <Menu onClick={this.handleClick}>
+      <Menu onClick={this.handleClick} style = {overlayStyle}>
         <Menu.Item key="1" name="type">社会实践</Menu.Item>
         <Menu.Item key="2" name="type">创新创业</Menu.Item>
         <Menu.Item key="3" name="type">校园服务</Menu.Item>
         <Menu.Item key="4" name="type">志愿服务</Menu.Item>
         <Menu.Item key="5" name="type">学术讲座</Menu.Item>
         <Menu.Item key="6" name="type">学科竞赛</Menu.Item>
+        <Menu.Item key="7" name="type">思想引领</Menu.Item>
+        <Menu.Item key="8" name="type">体育健身</Menu.Item>
+        <Menu.Item key="9" name="type">文化熏陶</Menu.Item>
+        <Menu.Item key="10" name="type">素质拓展</Menu.Item>
+        <Menu.Item key="11" name="type">职业规划</Menu.Item>
         <Menu.Item key="0" name="type">不限</Menu.Item>
       </Menu>
     );
     const order = (
-      <Menu onClick={this.handleClick} name="order">
+      <Menu onClick={this.handleClick} name="order" style={{width:'91vw', margin:'0 4.5vw'}}>
         <Menu.Item name="order" key="1">即将开始</Menu.Item>
         <Menu.Item name="order" key="2">最热排序</Menu.Item>
       </Menu>
     );
     const status = (
-      <Menu onClick={this.handleClick}>
+      <Menu onClick={this.handleClick} style={{width:'91vw', margin:'0 4.5vw'}}>
         <Menu.Item name="status" key="1">未开始</Menu.Item>
         <Menu.Item name="status" key="2">进行中</Menu.Item>
         <Menu.Item name="status" key="3">已结束</Menu.Item>
