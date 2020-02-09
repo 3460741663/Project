@@ -1,0 +1,6 @@
+.contain{
+  width: 100vw;
+  padding: 4vw;
+  height: 87vh;
+  overflow: scroll;
+}

@@ -3,6 +3,8 @@ import { Tabs, Icon } from 'antd';
 import styles from './Home.css';
 import HomePage from '../homePage/HomePage.jsx';
 import ActivitySqare from '../activititySquare/activitySquare';
+import Mine from '../mine/Mine';
+import Dynamic from '../dynamic/Dynamic'
 
 class Home extends Component {
   componentWillMount() {
@@ -16,7 +18,7 @@ class Home extends Component {
       <div>
         <Tabs defaultActiveKey="1" size="small  " tabPosition="bottom">
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/shouye2.png" className={styles.icon} alt="" /><span>首页</span></div>} key="1" forceRender >
-             <ActivitySqare {...this.props} />
+             <Dynamic {...this.props} />
           </TabPane>
           <TabPane  tab={<div className={styles.iconContain}><img src="./image/icon/huodong2.png" className={styles.icon} alt="" /><span>活动</span></div>} key="2" forceRender >
             <ActivitySqare {...this.props} />
@@ -25,7 +27,7 @@ class Home extends Component {
             <HomePage {...this.props} />
           </TabPane>
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/wode2.png" className={styles.icon} alt="" /><span>我的</span></div>} key="4" forceRender >
-            <HomePage {...this.props} />
+            <Mine {...this.props} />
           </TabPane>
         </Tabs>
       </div>
