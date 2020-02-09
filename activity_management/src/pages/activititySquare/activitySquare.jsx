@@ -4,7 +4,7 @@ import { getActivityList } from './action'
 import styles from './activitySquare.css';
 import withStyles from '../../withStyles';
 import MenuContain from './MenuContain'
-import { Button, PullToRefresh, Toast, ListView } from 'antd-mobile'
+import { Button, PullToRefresh, Toast, ListView, SearchBar } from 'antd-mobile'
 
 
 class activitySquare extends Component {
@@ -14,11 +14,11 @@ class activitySquare extends Component {
   getDate(){
     // 修改page的值
     let temp = this.props.params;
-    console.log(this.props.params.page);
+    // console.log(this.props.params.page);
     temp.page = this.props.params.page !== 0 ? temp.page + 1 : 1;
     this.props.changeParams(temp);
     // 发出请求
-    console.log(this.props, '我要发请求了')
+    // console.log(this.props, '我要发请求了')
     this.props.getActivityList(this.props.params);
   }
   render() {
@@ -29,7 +29,7 @@ class activitySquare extends Component {
     return (
       <div className={styles.contain}>
         <div><img src="./image/posters.jpg" className={styles.poster} alt="" /></div>
-        <div className={styles.text}><span>本校活动</span></div>
+        <SearchBar placeholder="本校活动" maxLength={8} />
         <div className={styles.acitivityContain}>
           <MenuContain />
           <div className={styles.activityList}
@@ -40,7 +40,7 @@ class activitySquare extends Component {
               // refreshing='true'
               onRefresh={() => {
                 // console.log(menu)
-                console.log('加载更多的数据！');
+                // console.log('加载更多的数据！');
                 this.getDate();
               }}
             >
@@ -73,7 +73,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getActivityList(params))
     },
     changeParams:(params)=>{
-      console.log(params, '被放进了redux中！')
       dispatch({
         type: 'UPDATA_PARAMS',
         params: params

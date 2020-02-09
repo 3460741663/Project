@@ -19,7 +19,7 @@ class MenuContain extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick(event) {
-    console.log(event)
+    // console.log(event)
     // 修改菜单名字
     let nameCollection = {type:'类别', belongs:'所属组织', status:'状态', order:'排序'};
     let tempName = this.state.tabName;
@@ -32,7 +32,7 @@ class MenuContain extends Component {
       param:temp,
       tabName:tempName
     })
-    console.log(this.props.params)
+    // console.log(this.props.params)
     // 保存参数
     let temp1 = this.props.params;
     temp1[event.item.props.name] = event.key;
@@ -97,12 +97,9 @@ class MenuContain extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     getActivityList: (params) => {
-      // console.log('我是dispatch')
-      // console.log(params);
       dispatch(getActivityList(params))
     },
     changeParams:(params)=>{
-      console.log(params, '被放进了redux中！')
       dispatch({
         type: 'UPDATA_PARAMS',
         params: params
