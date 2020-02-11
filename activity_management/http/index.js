@@ -19,6 +19,16 @@ export function loginVerify(params){
     })
 }
 
+// 获取与我相关的事务
+export function Related(params) {
+    console.log('获取与我相关！')
+    return fetch({
+        url:'/Related',
+        method: 'GET',
+        params
+    })
+}
+
 
 // export function apiGetData() {
 //     return fetch({

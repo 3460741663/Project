@@ -4,7 +4,8 @@ import Home from './pages/home/Home';
 import Login from './pages/Login/Login';
 import activitySquare from '../src/pages/activititySquare/activitySquare';
 import ActivityDetail from '../src/pages/activityDetail/activityDetail';
-import Mine from '../src/pages/mine/Mine'
+import Mine from '../src/pages/mine/Mine';
+import DynamicPage from '../src/pages/dynamic/Dynamic'
 
 export default [
   {
@@ -24,6 +25,11 @@ export default [
         path: '/activitySquare',
         component: activitySquare,
         loadData: activitySquare.loadData,
+      },
+      {
+        path: '/dynamic',
+        component: DynamicPage,
+        loadData: DynamicPage.loadData,
       },
       {
         path: '/activityDetail',
