@@ -1,51 +1,34 @@
 import React, { Component } from 'react';
 import styles from './TimeLine.css';
 import withStyles from '../../withStyles'
-import { FaBeer, FaAd } from 'react-icons/fa'
+import { FaBeer, FaCalendarTimes } from 'react-icons/fa';
 
 function VerticalTimelineElement({data}) {
+  const content = ['未签到', '已签到'];
+  const iconStyle = { background: 'rgb(33, 150, 243)', color: '#fff' }
   return (
     <div className={styles.vertical_timeline_element}>
-      <FaBeer className={`${styles.vertical_timeline_element_icon} ${styles.bounce_in}`} />
+      <FaCalendarTimes className={`${styles.vertical_timeline_element_icon} ${styles.bounce_in}`} style={iconStyle} />
       <div className={styles.vertical_timeline_element_content}>
         <div className={styles.vertical_timeline_element_content_arrow}></div>
-        <h3 className={styles.vertical_timeline_element_title}>{data.title}</h3>
-        <h4 className={styles.vertical_timelineelement_subtitle}>{data.belongs}</h4>
-        <p>{data.content}</p>
-        <span className={styles.vertical_timeline_element_date}>{data.date}</span>
+        <h3 className={styles.vertical_timeline_element_title}>{data.name}</h3>
+        <h4 className={styles.vertical_timelineelement_subtitle}>{data.signed ? content[data.signed] : '助签员'}</h4>
+        <p>{data.description}</p>
+        <span className={styles.vertical_timeline_element_date}>{data.start_time}</span>
       </div>
     </div>
   )
 }
 class TimeLine extends Component {
   render() {
-    const data = [
-      {
-        title: '我是一条数据',
-        belongs: '所属机构',
-        content: '本次活动旨在促进同学们之间团结互助',
-        date: '2039-19-5'
-      },
-      {
-        title: 'Creative Director',
-        belongs: 'Miami, FL',
-        content: 'Creative Direction, User Experience, Visual Design, Project Management, Team Leading',
-        date: '2039-19-5'
-      }
-    ]
+    const {data} = this.props;
     return (
       <div className = {styles.vertical_timeline}>
         {
           data.map((item, index)=>{
-            return (<VerticalTimelineElement data={item}  />)
+            return (<VerticalTimelineElement key={index} data={item}  />)
           })
         }
-        {/* <VerticalTimelineElement data={item[0]}  />
-        <VerticalTimelineElement data={item[1]}  />
-        <VerticalTimelineElement data={item[1]}  />
-        <VerticalTimelineElement data={item[1]}  />
-        <VerticalTimelineElement data={item[1]}  />
-        <VerticalTimelineElement data={item[1]}  /> */}
       </div>
     );
   }

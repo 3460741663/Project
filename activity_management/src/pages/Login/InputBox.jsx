@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.user)
   }
   componentWillMount() {
     if (this.props.staticContext) {
@@ -56,7 +55,6 @@ class NormalLoginForm extends React.Component {
               if(res.data){
                 // redux
                 this.props.loginSuccess(res);
-                console.log(this.props.user);
               }else{
                 Toast.info('账号或密码错误！');
               }

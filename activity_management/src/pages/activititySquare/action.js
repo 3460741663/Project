@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { getActivity } from '../../../http/index'
 export const getActivityList = function (params) {
   return (dispatch) => {

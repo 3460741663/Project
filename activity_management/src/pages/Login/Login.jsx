@@ -11,7 +11,7 @@ class Login extends Component {
     return (
       <div className={styles.contain}>
         <div><img src="./image/school_bg.jpg" className={styles.logo} alt=""/></div>
-        <div className={styles.InputBox}><InputBox form={form} verify={loginVerify}/></div>
+        <div className={styles.InputBox}><InputBox form={form} verify={loginVerify} {...this.props}/></div>
         <div className={styles.quickLogin}>
           <Link to='/activitySquare'><img src="./image/icon/qq.png" className={styles.icon} alt=""/></Link>
           <Link to='/activitySquare'><img src="./image/icon/weibo.png" className={styles.icon} alt=""/></Link>

@@ -33,7 +33,6 @@ app.get('*', (req, res) => {
   // 等待执行完成后才render
   Promise.all(promises)
   .then((resArray) => {
-    
     let context = {css: []};
     const html = render(req, store, context);
     res.send(html);
