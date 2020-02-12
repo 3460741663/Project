@@ -18,13 +18,13 @@ class Home extends Component {
       <div>
         <Tabs defaultActiveKey="1" size="small  " tabPosition="bottom">
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/shouye2.png" className={styles.icon} alt="" /><span>首页</span></div>} key="1" forceRender >
-             <Dynamic {...this.props} />
+            <Mine {...this.props} />
           </TabPane>
           <TabPane  tab={<div className={styles.iconContain}><img src="./image/icon/huodong2.png" className={styles.icon} alt="" /><span>活动</span></div>} key="2" forceRender >
             <ActivitySqare {...this.props} />
           </TabPane>
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/dongtai2.png" className={styles.icon} alt="" /><span>动态</span></div>} key="3" forceRender >
-            <HomePage {...this.props} />
+            <Dynamic {...this.props} />
           </TabPane>
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/wode2.png" className={styles.icon} alt="" /><span>我的</span></div>} key="4" forceRender >
             <Mine {...this.props} />
