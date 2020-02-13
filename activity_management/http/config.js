@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
     // 对axios的封装
     let fetch = axios.create({
-        baseURL: 'http://127.0.0.1:8090/activity_management', // 这里是后端服务器地址
+        // baseURL: 'http://127.0.0.1:8090/activity_management', // 这里是后端服务器地址
         credentials: 'include',// 即便是跨域，也携带cookie
         timeout: 5000 // request timeout
     })

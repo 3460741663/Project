@@ -123,7 +123,17 @@ onClick={()=>{
 原因是在renderToString的时候，传递的context这个钩子变量，并没有传递到引入的组件中，所以，原样传递获知只传staticContext也行
 `
 <HomePage {...this.props} />
-` 
+`
+
+![](https://user-gold-cdn.xitu.io/2020/2/14/170433ff520cb3b2?w=470&h=836&f=png&s=196464)
+
+![](https://user-gold-cdn.xitu.io/2020/2/14/17043406006ec776?w=471&h=837&f=png&s=171441)
+
+![](https://user-gold-cdn.xitu.io/2020/2/14/17043511a2ba5d05?w=470&h=838&f=png&s=133479)
+
+![](https://user-gold-cdn.xitu.io/2020/2/14/1704351a80ce6220?w=472&h=836&f=png&s=60868)
+
+![](https://user-gold-cdn.xitu.io/2020/2/14/170435225ddba540?w=471&h=835&f=png&s=97994)
 ## 活动举办前
 ### 活动申请
 ### 活动审核

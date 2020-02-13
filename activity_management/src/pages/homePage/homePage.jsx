@@ -5,7 +5,8 @@ import { Carousel, SearchBar, Grid } from 'antd-mobile';
 import { Icon } from 'antd';
 import { Gift, Defend, Detail, Dollar, Activity, Collection, Dailoge, Help, Tag, Like } from '../mine/iconSource';
 import { connect } from 'react-redux';
-import { getNews } from './action'
+import { getNews } from './action';
+import WithStyles from '../../withStyles'
 
 // item 函数组件，简化代码结构
 function NewsItem({data}) {
@@ -41,7 +42,6 @@ class HomePage extends Component {
     }, 100);
   }
   render() {
-    this.props.news && console.log(this.props.news)
     const data = [{icon: Collection, text: '收藏'}, {icon: Like, text: '部落'}, {icon: Activity, text: '活动'},
       {icon: Help, text: '帮助'}, {icon: Defend, text: '申诉'}, {icon: Detail, text: '我的学分'},
       {icon: Tag, text: '标签'}, {icon: Dailoge, text: '客服'}
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
     news: state.activityReducer.news
   }
 }
-const homePage = connect(mapStateToProps, mapDispatchToProps)(HomePage);
+const homePage = connect(mapStateToProps, mapDispatchToProps)(WithStyles(HomePage, styles));
 
 homePage.loadData = (store) => {
   return store.dispatch(getNews())

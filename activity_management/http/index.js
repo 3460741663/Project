@@ -4,7 +4,7 @@ import QS from 'qs';
 // 获取活动列表
 export function getActivity(params) {
     return fetch({
-        url: '/getActivityList',
+        url: 'http://127.0.0.1:8090/activity_management/getActivityList',
         method: 'get',
         params
     })
@@ -13,7 +13,7 @@ export function getActivity(params) {
 export function loginVerify(params){
     console.log('我是登录验证的方法！')
     return fetch({
-        url:'/login',
+        url:'http://127.0.0.1:8090/activity_management/login',
         method:'get',
         params
     })
@@ -23,9 +23,18 @@ export function loginVerify(params){
 export function Related(params) {
     console.log('获取与我相关！')
     return fetch({
-        url:'/Related',
+        url:'http://127.0.0.1:8090/activity_management/Related',
         method: 'GET',
         params
+    })
+}
+
+// 获取新闻数据
+export function GetNews(){
+    console.log('获取新闻数据！');
+    return fetch({
+        url:'http://localhost:3003/mapi/comment',
+        method: 'GET'
     })
 }
 
