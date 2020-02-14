@@ -18,7 +18,7 @@ class Home extends Component {
       <div>
         <Tabs defaultActiveKey="1" size="small  " tabPosition="bottom">
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/shouye2.png" className={styles.icon} alt="" /><span>首页</span></div>} key="1" forceRender >
-            <Mine {...this.props} />
+            <HomePage {...this.props} />
           </TabPane>
           <TabPane  tab={<div className={styles.iconContain}><img src="./image/icon/huodong2.png" className={styles.icon} alt="" /><span>活动</span></div>} key="2" forceRender >
             <ActivitySqare {...this.props} />

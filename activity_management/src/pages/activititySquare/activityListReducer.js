@@ -16,6 +16,8 @@ export const activityReducer = (state = defaultState, actions) => {
       return { ... state, activity:actions.activity };
     case constant.REMOVE_ACTIVITY:
       return { ... state, activity:actions.activity };
+    case 'GET_NEWS':
+      return { ...state, news:actions.news}
     case constant.UPDATA_PARAMS:
       return { ...state, params:actions.params}
     default: return state
