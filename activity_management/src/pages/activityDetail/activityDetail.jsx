@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge } from 'antd-mobile'
-class ActivityDetail extends Component {
+import styles from './activityDetail.css';
+import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge } from 'antd-mobile';
+import { Icon } from 'antd';
 
+class ActivityDetail extends Component {
   render() {
     const Step = Steps.Step;
     const steps = [{
       title: '报名',
-      description: '未报名',
+      description: '已报名',
     }, {
       title: '签到',
-      description: '等待签到',
+      description: '签到成功',
     }, {
       title: '结束',
       description: '活动结束',
@@ -28,48 +30,61 @@ class ActivityDetail extends Component {
       { title: '评价' },
     ];
     return (
-      <div>
-        <WhiteSpace size="lg" />
-        <Card full>
-          <Card.Header
-            title='【校实践部】2020"创青春赛事专场答疑"'
-            thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-          // extra={<span>this is extra</span>}
-          />
-          <Card.Body>
-            <div>活动 2019/12/13 ~ 2019/12/31</div>
-          </Card.Body>
-          <Card.Footer content="蛟桥园南区201/麦庐园图文信息楼六楼" />
-        </Card>
-
-        <WingBlank mode={20} className="stepsExample">
-          <WhiteSpace />
-          <Steps current={2} direction="horizontal" size="small">{steps}</Steps>
-        </WingBlank>
-
-
-        <div>
-          <Tabs tabs={tabs}
-            initialPage={1}
-            onChange={(tab, index) => { console.log('onChange', index, tab); }}
-            onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              Content of first tab
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              Content of second tab
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-              Content of third tab
-            </div>
-          </Tabs>
-          <WhiteSpace />
+      <div className={styles.contain}>
+        <div className={styles.head}>
+          <Icon type="left" />
+          <div style={{ width: '85vw', textAlign: 'center' }}>
+            <h3>活动详情</h3>
+          </div>
+          <Icon type="more" />
         </div>
-        <div>
-        <div>收藏</div>
-        <div>报名/等待签到/已签到/已结束</div>
-      </div>
+        <div className={styles.content}>
+          <div className={styles.card}>
+            <Card full>
+              {/* <span className={styles.point}>2.0</span> */}
+              <Card.Header
+                title='【校实践部】2020"创青春fasdfasdfa赛事专场"'
+                thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
+              >
+              </Card.Header>
+              <Card.Body>
+                <span className={styles.point}>2.0</span>
+                <div>活动时间 2019/12/13 ~ 2019/12/31</div>
+              </Card.Body>
+              <Card.Footer content="蛟桥园南区201/麦庐园图文信息楼六楼" />
+            </Card>
+          </div>
+
+          <div className={styles.step}>
+            <Steps current={2} direction="horizontal" size="small">{steps}</Steps>
+          </div>
+
+          <div className={styles.slide}>
+            <Tabs tabs={tabs} initialPage={1}>
+              <div style={{padding: '5vw', display: 'flex', alignItems: 'left', justifyContent: 'center', height: '30vh', backgroundColor: '#fff', justifyContent:'space-between',flexFlow: 'column' }}>
+                <span>活动分类: &nbsp;&nbsp;&nbsp;&nbsp;社会实践</span>
+                <span>所属组织: &nbsp;&nbsp;&nbsp;&nbsp;国际学院</span>
+                <span>活动年级: &nbsp;&nbsp;&nbsp;&nbsp;2019级&nbsp;2018级&nbsp;2017级</span>
+                <span>联系方式: &nbsp;&nbsp;&nbsp;&nbsp;邹声达 18770869179</span>
+                <span>活动院系: &nbsp;&nbsp;&nbsp;&nbsp;社会实践</span>
+            </div>
+              <div style={{padding: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30vh', backgroundColor: '#fff' }}>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提高学生积极性与学生的环保意识，增强大家对植物的认识，提高大家对植物的爱护意识，增强大家对绿化环境保护的意识。给我们的城市建设作贡献，给我们的家园增添- -点绿色，使我们的生活环境更加美丽。同时拉动江财支付宝公益林发展，让同学们积极投入到环保行动中，把植树理念、绿色文化宣传到全校师生的心中。</p>
+            </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30vh', backgroundColor: '#fff' }}>
+                暂无评价
+            </div>
+            </Tabs>
+            <WhiteSpace />
+          </div>
+        </div>
+        <div className={styles.footer}>
+            <div className={styles.like}>收藏</div>
+            <div className={styles.status}>
+              我要报名
+              {/* 报名/等待签到/已签到/已结束 */}
+            </div>
+          </div>
       </div>
     );
   }
