@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styles from './activityDetail.css';
 import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge } from 'antd-mobile';
 import { Icon } from 'antd';
+// import WithStyles from '../../withStyles'
+import withStyles from '../../withStyles';
+import { Link } from 'react-router-dom';
 
 class ActivityDetail extends Component {
   render() {
@@ -29,8 +32,26 @@ class ActivityDetail extends Component {
       { title: '详情' },
       { title: '评价' },
     ];
+    const data = {
+      type_name: '体育运动',
+      img: '9',
+      type_ID: '9',
+      community_name: '篮球社',
+      description: '为了发展我校大学生的体育运动，促进爱好台球竞技的新生之间的友谊，增进同学们对台球精神的认识和理解，以及推广这项富有趣味性、益智信的运动项目，故举办此次新生杯台球赛。',
+      point: '5.0',
+      duration: '120',
+      start_time: '2019-11-22',
+      community_ID: '4',
+      user_ID: '1',
+      name: '软件学院篮球杯决赛',
+      ID: '9',
+      position: '翼珍楼',
+      status: '3'
+    }
+    const title = `【${data.community_name}】${data.name}`
     return (
       <div className={styles.contain}>
+        {/* <Link to='/home'>去home页面</Link> */}
         <div className={styles.head}>
           <Icon type="left" />
           <div style={{ width: '85vw', textAlign: 'center' }}>
@@ -43,15 +64,15 @@ class ActivityDetail extends Component {
             <Card full>
               {/* <span className={styles.point}>2.0</span> */}
               <Card.Header
-                title='【校实践部】2020"创青春fasdfasdfa赛事专场"'
+                title={title}
                 thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
               >
               </Card.Header>
               <Card.Body>
-                <span className={styles.point}>2.0</span>
-                <div>活动时间 2019/12/13 ~ 2019/12/31</div>
+                <span className={styles.point}>{data.point}</span>
+                <div>活动时间&nbsp;&nbsp;{data.start_time}</div>
               </Card.Body>
-              <Card.Footer content="蛟桥园南区201/麦庐园图文信息楼六楼" />
+              <Card.Footer content={data.position} />
             </Card>
           </div>
 
@@ -61,16 +82,16 @@ class ActivityDetail extends Component {
 
           <div className={styles.slide}>
             <Tabs tabs={tabs} initialPage={1}>
-              <div style={{padding: '5vw', display: 'flex', alignItems: 'left', justifyContent: 'center', height: '30vh', backgroundColor: '#fff', justifyContent:'space-between',flexFlow: 'column' }}>
-                <span>活动分类: &nbsp;&nbsp;&nbsp;&nbsp;社会实践</span>
-                <span>所属组织: &nbsp;&nbsp;&nbsp;&nbsp;国际学院</span>
+              <div style={{ padding: '5vw', display: 'flex', alignItems: 'left', justifyContent: 'center', height: '30vh', backgroundColor: '#fff', justifyContent: 'space-between', flexFlow: 'column' }}>
+                <span>活动分类: &nbsp;&nbsp;&nbsp;&nbsp;{data.type_name}</span>
+                <span>所属组织: &nbsp;&nbsp;&nbsp;&nbsp;{data.community_name}</span>
                 <span>活动年级: &nbsp;&nbsp;&nbsp;&nbsp;2019级&nbsp;2018级&nbsp;2017级</span>
                 <span>联系方式: &nbsp;&nbsp;&nbsp;&nbsp;邹声达 18770869179</span>
-                <span>活动院系: &nbsp;&nbsp;&nbsp;&nbsp;社会实践</span>
-            </div>
-              <div style={{padding: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30vh', backgroundColor: '#fff' }}>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提高学生积极性与学生的环保意识，增强大家对植物的认识，提高大家对植物的爱护意识，增强大家对绿化环境保护的意识。给我们的城市建设作贡献，给我们的家园增添- -点绿色，使我们的生活环境更加美丽。同时拉动江财支付宝公益林发展，让同学们积极投入到环保行动中，把植树理念、绿色文化宣传到全校师生的心中。</p>
-            </div>
+                <span>活动院系: &nbsp;&nbsp;&nbsp;&nbsp;全体学生</span>
+              </div>
+              <div style={{ padding: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30vh', backgroundColor: '#fff' }}>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.description}</p>
+              </div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '30vh', backgroundColor: '#fff' }}>
                 暂无评价
             </div>
@@ -79,15 +100,15 @@ class ActivityDetail extends Component {
           </div>
         </div>
         <div className={styles.footer}>
-            <div className={styles.like}>收藏</div>
-            <div className={styles.status}>
-              我要报名
+          <div className={styles.like}><Icon type="star" />收藏</div>
+          <div className={styles.status}>
+            我要报名
               {/* 报名/等待签到/已签到/已结束 */}
-            </div>
           </div>
+        </div>
       </div>
     );
   }
 }
 
-export default ActivityDetail;
+export default withStyles(ActivityDetail, styles);
