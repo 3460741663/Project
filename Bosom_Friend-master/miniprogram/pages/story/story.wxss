@@ -1,8 +1,0 @@
-swiper {
-  height: 100rpx;
-}
-.submit{
-  width: 400rpx;
-  height: 400rpx;
-  background-color: black;
-}
