@@ -5,13 +5,14 @@ import styles from './activitySquare.css';
 import withStyles from '../../withStyles';
 import MenuContain from './MenuContain'
 import { Button, PullToRefresh, Toast, ListView, SearchBar } from 'antd-mobile'
+import { Link } from 'react-router-dom';
 
 
 class activitySquare extends Component {
   componentWillMount() {
     this.props.getActivityList();
   }
-  getDate(){
+  getDate() {
     // 修改page的值
     let temp = this.props.params;
     // console.log(this.props.params.page);
@@ -25,7 +26,7 @@ class activitySquare extends Component {
     // const parentRef = React.createRef();
     const menu = React.createRef;
     const { activityList } = this.props
-    const position = [7, 26, 48, 67, 89, 108, 129, 150, 171, 191, 211]
+    const position = [7, 26, 48, 67, 89, 108, 129, 150, 171, 191, 211];
     return (
       <div className={styles.contain}>
         <div><img src="./image/posters.jpg" className={styles.poster} alt="" /></div>
@@ -33,7 +34,7 @@ class activitySquare extends Component {
         <div className={styles.acitivityContain}>
           <MenuContain />
           <div className={styles.activityList}
-            >
+          >
             <PullToRefresh
               damping={60}
               direction='down'
@@ -47,16 +48,18 @@ class activitySquare extends Component {
               {
                 activityList && activityList.map((item, index) => {
                   return (
-                    <div className={styles.activtyItem} key={index}>
-                      <div className={styles.textContain}>
-                        <div className={styles.name}><span><span>【{item.community_name}】</span>{item.name}</span></div>
-                        <div className={styles.time}><span>{item.start_time}&nbsp;&nbsp;&nbsp;&nbsp;{item.position}</span></div>
-                        <div className={styles.point}><span>{item.point}</span></div>
+                    <Link to={{pathname: '/activityDetail', param:item}} key={index}>
+                      <div className={styles.activtyItem}>
+                        <div className={styles.textContain}>
+                          <div className={styles.name}><span><span>【{item.community_name}】</span>{item.name}</span></div>
+                          <div className={styles.time}><span>{item.start_time}&nbsp;&nbsp;&nbsp;&nbsp;{item.position}</span></div>
+                          <div className={styles.point}><span>{item.point}</span></div>
+                        </div>
+                        <div className={styles.imgContain}>
+                          <img className={styles.img} style={{ top: `-${position[item.img]}vh` }} src="./image/LOGO.png" alt="" />
+                        </div>
                       </div>
-                      <div className={styles.imgContain}>
-                        <img className={styles.img} style={{ top: `-${position[item.img]}vh` }} src="./image/LOGO.png" alt="" />
-                      </div>
-                    </div>
+                    </Link>
                   )
                 })
               }
@@ -72,7 +75,7 @@ const mapDispatchToProps = (dispatch) => {
     getActivityList: (params) => {
       dispatch(getActivityList(params))
     },
-    changeParams:(params)=>{
+    changeParams: (params) => {
       dispatch({
         type: 'UPDATA_PARAMS',
         params: params

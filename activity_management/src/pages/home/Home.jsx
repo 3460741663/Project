@@ -14,9 +14,10 @@ class Home extends Component {
   }
   render() {
     const { TabPane } = Tabs;
+    const key = this.props.location ? this.props.location.tabs+'' : "1"
     return (
       <div>
-        <Tabs defaultActiveKey="1" size="small  " tabPosition="bottom">
+        <Tabs defaultActiveKey={key} size="small  " tabPosition="bottom">
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/shouye1.png" className={styles.icon} alt="" /><span>首页</span></div>} key="1" forceRender >
             <HomePage {...this.props} />
           </TabPane>

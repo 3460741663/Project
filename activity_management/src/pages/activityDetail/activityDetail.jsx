@@ -4,7 +4,7 @@ import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge } from 'antd-mobile';
 import { Icon } from 'antd';
 // import WithStyles from '../../withStyles'
 import withStyles from '../../withStyles';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
 class ActivityDetail extends Component {
   render() {
@@ -32,28 +32,29 @@ class ActivityDetail extends Component {
       { title: '详情' },
       { title: '评价' },
     ];
-    const data = {
-      type_name: '体育运动',
-      img: '9',
-      type_ID: '9',
-      community_name: '篮球社',
-      description: '为了发展我校大学生的体育运动，促进爱好台球竞技的新生之间的友谊，增进同学们对台球精神的认识和理解，以及推广这项富有趣味性、益智信的运动项目，故举办此次新生杯台球赛。',
-      point: '5.0',
-      duration: '120',
-      start_time: '2019-11-22',
-      community_ID: '4',
-      user_ID: '1',
-      name: '软件学院篮球杯决赛',
-      ID: '9',
-      position: '翼珍楼',
-      status: '3'
-    }
+    const data = this.props.location.param
+    // {
+    //   type_name: '体育运动',
+    //   img: '9',
+    //   type_ID: '9',
+    //   community_name: '篮球社',
+    //   description: '为了发展我校大学生的体育运动，促进爱好台球竞技的新生之间的友谊，增进同学们对台球精神的认识和理解，以及推广这项富有趣味性、益智信的运动项目，故举办此次新生杯台球赛。',
+    //   point: '5.0',
+    //   duration: '120',
+    //   start_time: '2019-11-22',
+    //   community_ID: '4',
+    //   user_ID: '1',
+    //   name: '自律青春炫彩江财才子佳人汇江财',
+    //   ID: '9',
+    //   position: '翼珍楼',
+    //   status: '3'
+    // }
     const title = `【${data.community_name}】${data.name}`
     return (
       <div className={styles.contain}>
         {/* <Link to='/home'>去home页面</Link> */}
         <div className={styles.head}>
-          <Icon type="left" />
+          <Link to={{pathname: '/home', tabs:2}}><Icon type="left" /></Link>
           <div style={{ width: '85vw', textAlign: 'center' }}>
             <h3>活动详情</h3>
           </div>

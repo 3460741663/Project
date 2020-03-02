@@ -19,7 +19,6 @@ app.get('*', (req, res) => {
   // 2. 拿到组件上面的loadData
   // 3. dispatch
   // 4. 渲染
-  
   const matchRouters = matchRoutes(routes, req.path);
   // 创建一个store,然后往里面填充数据。这些数据就是被这个路由命中的所有组件的所有数据，包括dispatch之后的数据。所以，需要收集到所有的loadData,并等待它执行完成。
   const store = Serverstore();
