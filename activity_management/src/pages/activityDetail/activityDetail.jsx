@@ -1,60 +1,58 @@
 import React, { Component } from 'react';
 import styles from './activityDetail.css';
-import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge } from 'antd-mobile';
+import { Card, WhiteSpace, Steps, WingBlank, Tabs, Badge, Toast } from 'antd-mobile';
 import { Icon } from 'antd';
-// import WithStyles from '../../withStyles'
 import withStyles from '../../withStyles';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+
 
 class ActivityDetail extends Component {
+  constructor(props){
+    super(props);
+    this.GetStatus();
+    this.state = {
+      step:[{title: '报名'}, {title: '签到'}, {title: '结束'}],
+      status:0
+    }
+  }
+  GetStatus(){
+    // console.log('这个活动的ID',this.props.location.param.ID)
+    // console.log('这个用户的ID',this.props.user.data[0].user_ID)
+    if(this.props.user){
+      console.log('获取当前用户的这个活动状态')
+      // TODO
+    }else{
+      // 未登录用户
+      console.log('我是游客，提示我去登录')
+    }
+  }
+  apply(){
+    let temp = this.state;
+    temp.status ++;
+    this.setState(temp)
+    console.log('我帮他报名！')
+    // TODO
+  }
+  sign(){
+    let temp = this.state;
+    temp.status ++;
+    this.setState(temp)
+    console.log('我帮他签到')
+    // TODO
+  }
   render() {
     const Step = Steps.Step;
-    const steps = [{
-      title: '报名',
-      description: '已报名',
-    }, {
-      title: '签到',
-      description: '签到成功',
-    }, {
-      title: '结束',
-      description: '活动结束',
-    }].map((s, i) => <Step key={i} title={s.title} description={s.description} />);
-    const customIcon = () => (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42" className="am-icon am-icon-md">
-        <g fillRule="evenodd" stroke="transparent" strokeWidth="4">
-          <path d="M21 0C9.402 0 0 9.402 0 21c0 11.6 9.402 21 21 21s21-9.4 21-21C42 9.402 32.598 0 21 0z" />
-          <path fill="#FFF" d="M29 18.73c0-.55-.447-1-1-1H23.36l4.428-5.05c.407-.46.407-1.208 0-1.668-.407-.46-1.068-.46-1.476 0l-5.21 5.89-5.21-5.89c-.406-.46-1.067-.46-1.475 0-.406.46-.406 1.207 0 1.667l4.43 5.05H14.23c-.55 0-.998.45-.998 1 0 .554.448.97 1 .97h5.9v3.942h-5.9c-.552 0-1 .448-1 1s.448.985 1 .985h5.9v4.896c0 .552.448 1 1 1 .55 0 .968-.284.968-.836v-5.06H28c.553 0 1-.433 1-.985s-.447-1-1-1h-5.9v-3.94H28c.553 0 1-.418 1-.97z" />
-        </g>
-      </svg>
-    );
-    const tabs = [
-      { title: '信息' },
-      { title: '详情' },
-      { title: '评价' },
-    ];
-    const data = this.props.location.param
-    // {
-    //   type_name: '体育运动',
-    //   img: '9',
-    //   type_ID: '9',
-    //   community_name: '篮球社',
-    //   description: '为了发展我校大学生的体育运动，促进爱好台球竞技的新生之间的友谊，增进同学们对台球精神的认识和理解，以及推广这项富有趣味性、益智信的运动项目，故举办此次新生杯台球赛。',
-    //   point: '5.0',
-    //   duration: '120',
-    //   start_time: '2019-11-22',
-    //   community_ID: '4',
-    //   user_ID: '1',
-    //   name: '自律青春炫彩江财才子佳人汇江财',
-    //   ID: '9',
-    //   position: '翼珍楼',
-    //   status: '3'
-    // }
+    const steps = this.state.step.map((s, i) => <Step key={i} title={s.title} description={s.description} />);
+    const tabs = [{ title: '信息' },{ title: '详情' },{ title: '评价' }];
+    const statu = ['我要报名','我要签到','活动进行中','活动结束']
+    const data = this.props.location.param;
     const title = `【${data.community_name}】${data.name}`
     return (
       <div className={styles.contain}>
         {/* <Link to='/home'>去home页面</Link> */}
         <div className={styles.head}>
-          <Link to={{pathname: '/home', tabs:2}}><Icon type="left" /></Link>
+          <Link to={{ pathname: '/home', tabs: 2 }}><Icon type="left" /></Link>
           <div style={{ width: '85vw', textAlign: 'center' }}>
             <h3>活动详情</h3>
           </div>
@@ -63,10 +61,9 @@ class ActivityDetail extends Component {
         <div className={styles.content}>
           <div className={styles.card}>
             <Card full>
-              {/* <span className={styles.point}>2.0</span> */}
               <Card.Header
                 title={title}
-                thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
+                thumb="./image/icon/huodong.png"
               >
               </Card.Header>
               <Card.Body>
@@ -76,11 +73,11 @@ class ActivityDetail extends Component {
               <Card.Footer content={data.position} />
             </Card>
           </div>
-
+          {/* 进度 */}
           <div className={styles.step}>
-            <Steps current={2} direction="horizontal" size="small">{steps}</Steps>
+            <Steps current={this.state.status} direction="horizontal" size="small">{steps}</Steps>
           </div>
-
+          {/* 详细信息 */}
           <div className={styles.slide}>
             <Tabs tabs={tabs} initialPage={1}>
               <div style={{ padding: '5vw', display: 'flex', alignItems: 'left', justifyContent: 'center', height: '30vh', backgroundColor: '#fff', justifyContent: 'space-between', flexFlow: 'column' }}>
@@ -100,10 +97,16 @@ class ActivityDetail extends Component {
             <WhiteSpace />
           </div>
         </div>
+        {/* 底部 */}
         <div className={styles.footer}>
           <div className={styles.like}><Icon type="star" />收藏</div>
-          <div className={styles.status}>
-            我要报名
+          <div className={styles.status} 
+            onClick={() => {
+              if(!this.props.user) Toast.fail('尚未登录，无法报名 !!!', 1)
+              else if(this.state.status == 0) {this.apply(); Toast.success('报名成功 !!!', 1)}
+              else if(this.state.status == 1) {this.sign(); Toast.success('签到成功 !!!', 1)}
+            }}>
+              {statu[this.state.status]}
               {/* 报名/等待签到/已签到/已结束 */}
           </div>
         </div>
@@ -111,5 +114,23 @@ class ActivityDetail extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // getNews:()=>{
+    //   dispatch(getNews())
+    // }
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.user
+  }
+}
+// export default withStyles(ActivityDetail, styles);
 
-export default withStyles(ActivityDetail, styles);
+const activityDetail = connect(mapStateToProps, mapDispatchToProps)(withStyles(ActivityDetail, styles));
+
+activityDetail.loadData = (store) => {
+  // return store.dispatch(getNews())
+};
+export default activityDetail;
