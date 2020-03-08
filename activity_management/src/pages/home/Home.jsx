@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { Tabs, Icon } from 'antd';
+import { Tabs, Icon, Badge, NotificationOutlined } from 'antd';
 import styles from './Home.css';
 import HomePage from '../homePage/HomePage.jsx';
 import ActivitySqare from '../activititySquare/activitySquare';
 import Mine from '../mine/Mine';
-import Dynamic from '../dynamic/Dynamic'
+import Dynamic from '../dynamic/Dynamic';
 
 class Home extends Component {
-  componentWillMount() {
+  constructor(props){
+    super(props);
     if (this.props.staticContext) {
       this.props.staticContext.css.push(styles._getCss());
     }
   }
   render() {
     const { TabPane } = Tabs;
-    const key = this.props.location ? this.props.location.tabs+'' : "1"
+    const key = this.props.location ? this.props.location.tabs + '' : "1"
     return (
       <div>
         <Tabs defaultActiveKey={key} size="small  " tabPosition="bottom">
@@ -27,7 +28,7 @@ class Home extends Component {
           <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/dongtai1.png" className={styles.icon} alt="" /><span>动态</span></div>} key="3" forceRender >
             <Dynamic {...this.props} />
           </TabPane>
-          <TabPane tab={<div className={styles.iconContain}><img src="./image/icon/wode1.png" className={styles.icon} alt="" /><span>我的</span></div>} key="4" forceRender >
+          <TabPane tab={<div className={styles.iconContain} onClick={this.isLogin}><img src="./image/icon/wode1.png" className={styles.icon} alt="" /><span>我的</span></div>} key="4" forceRender >
             <Mine {...this.props} />
           </TabPane>
         </Tabs>

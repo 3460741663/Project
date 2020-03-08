@@ -9,8 +9,6 @@ import { connect } from 'react-redux'
 class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props);
-  }
-  componentWillMount() {
     if (this.props.staticContext) {
       this.props.staticContext.css.push(styles._getCss());
     }

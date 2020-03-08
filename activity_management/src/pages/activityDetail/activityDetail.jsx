@@ -17,8 +17,6 @@ class ActivityDetail extends Component {
     }
   }
   GetStatus(){
-    // console.log('这个活动的ID',this.props.location.param.ID)
-    // console.log('这个用户的ID',this.props.user.data[0].user_ID)
     if(this.props.user){
       console.log('获取当前用户的这个活动状态')
       // TODO

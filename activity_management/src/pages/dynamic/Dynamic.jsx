@@ -9,8 +9,6 @@ import { Button } from 'antd-mobile';
 class Dynamic extends Component {
   constructor(props){
     super(props);
-  }
-  componentWillMount(){
     this.props.getRelatedAffairs({user_ID:1});
   }
   render() { 

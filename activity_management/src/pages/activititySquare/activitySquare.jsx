@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 
 
 class activitySquare extends Component {
-  componentWillMount() {
+  constructor(props){
+    super(props);
     this.props.getActivityList();
   }
   getDate() {
