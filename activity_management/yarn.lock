@@ -2689,10 +2689,10 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-history@^4.9.0:
+history@^4.10.1, history@^4.9.0:
   version "4.10.1"
-  resolved "https://registry.npm.taobao.org/history/download/history-4.10.1.tgz?cache=0&sync_timestamp=1579725062909&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhistory%2Fdownload%2Fhistory-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
-  integrity sha1-MzcaZeOoOyZ0NOKz87G0xYqtTPM=
+  resolved "https://registry.yarnpkg.com/history/-/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
+  integrity sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==
   dependencies:
     "@babel/runtime" "^7.1.2"
     loose-envify "^1.2.0"
@@ -5846,9 +5846,9 @@ uri-js@^4.2.2:
     punycode "^2.1.0"
 
 urijs@^1.19.0:
-  version "1.19.2"
-  resolved "https://registry.npm.taobao.org/urijs/download/urijs-1.19.2.tgz#f9be09f00c4c5134b7cb3cf475c1dd394526265a"
-  integrity sha1-+b4J8AxMUTS3yzz0dcHdOUUmJlo=
+  version "1.19.8"
+  resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.8.tgz#ee0407a18528934d3c383e691912f47043a58feb"
+  integrity sha512-iIXHrjomQ0ZCuDRy44wRbyTZVnfVNLVo3Ksz1yxNyE5wV1IDZW2S5Jszy45DTlw/UdsnRT7DyDhIz7Gy+vJumw==
 
 urix@^0.1.0:
   version "0.1.0"
